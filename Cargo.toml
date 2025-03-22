@@ -1,0 +1,47 @@
+[package]
+name = "kernelos"
+version = "0.1.0"
+edition = "2021"
+authors = ["KernelOS Developer"]
+description = "A WebAssembly-based desktop environment that runs in the browser"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "kernelos"
+path = "src/lib.rs"
+
+[[bin]]
+name = "kernelos_cli"
+path = "src/main.rs"
+
+[dependencies]
+yew = { version = "0.20", features = ["csr"] }  # Revert to 0.20 which is known to be stable
+wasm-bindgen = "0.2.89"
+js-sys = "0.3.66"
+serde = { version = "1.0.196", features = ["derive"] }
+serde_json = "1.0.113"
+log = "0.4.20"
+wasm-logger = "0.2.0"
+implicit-clone = "=0.3.10"  # Pin exact version for compatibility with Yew 0.20
+web-sys = { version = "0.3.66", features = [
+    "Document", 
+    "Window", 
+    "Element", 
+    "HtmlElement", 
+    "HtmlInputElement", 
+    "MouseEvent", 
+    "KeyboardEvent", 
+    "InputEvent", 
+    "Node", 
+    "NodeList", 
+    "Storage", 
+    "console", 
+    "CssStyleDeclaration",
+    "EventTarget",
+    "HtmlCanvasElement",
+    "CanvasRenderingContext2d",
+    "HtmlTextAreaElement"
+]}
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.39"
